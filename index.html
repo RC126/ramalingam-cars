@@ -93,6 +93,15 @@ const $ = id => document.getElementById(id);
 function status(message, error=false){const el=$("status");el.textContent=message;el.classList.remove("hidden","error");if(error)el.classList.add("error");}
 function clearStatus(){$("status").classList.add("hidden");}
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function formatPrice(value) {
+    const amount = Number(String(value).replace(/[₹,\s]/g, ""));
+
+    if (isNaN(amount)) return value;
+
+    return "₹" + new Intl.NumberFormat("en-IN", {
+        maximumFractionDigits: 2
+    }).format(amount);
+}
 function publicPhoto(path){if(!path)return "";return sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;}
 async function loadCars(){
  $("cars").innerHTML='<div class="empty">Loading cars...</div>';
@@ -105,7 +114,7 @@ function render(){
  const list=cars.filter(c=>(!q||[c.make,c.model,c.year,c.fuel,c.description].join(" ").toLowerCase().includes(q))&&(!b||c.body_type===b)&&(!f||c.fuel===f));
  $("stockCount").textContent=`${cars.length} car${cars.length===1?"":"s"} currently available · Enquire directly on WhatsApp`;
  if(!list.length){$("cars").innerHTML='<div class="empty"><h3>No cars match your search</h3><p>Try changing your filters or contact us for current stock.</p><a class="btn" href="https://wa.me/919442080033?text=Hello%2C%20please%20share%20your%20available%20cars." target="_blank">Ask for Available Cars</a></div>';return;}
- $("cars").innerHTML=list.map(c=>{const msg=encodeURIComponent(`Hello Ramalingam Cars, I am interested in the ${c.year} ${c.make} ${c.model}. Please share availability and details.`);const photo=publicPhoto(c.photo_path);return `<article class="card"><div class="photo">${photo?`<img src="${esc(photo)}" alt="${esc(c.make+" "+c.model)}" loading="lazy">`:"🚘"}</div><div class="details"><h3>${esc(c.make)} ${esc(c.model)}</h3><div class="price">${esc(c.price)}</div><div class="specs"><span>${esc(c.year)}</span><span>${esc(c.km)}</span><span>${esc(c.fuel)}</span><span>${esc(c.transmission)}</span><span>${esc(c.owner||"")}</span></div>${c.description?`<p style="font-size:13px;color:#667085">${esc(c.description)}</p>`:""}<a class="btn" href="https://wa.me/919442080033?text=${msg}" target="_blank" rel="noopener">Enquire on WhatsApp</a></div></article>`}).join("");
+ $("cars").innerHTML=list.map(c=>{const msg=encodeURIComponent(`Hello Ramalingam Cars, I am interested in the ${c.year} ${c.make} ${c.model}. Please share availability and details.`);const photo=publicPhoto(c.photo_path);return `<article class="card"><div class="photo">${photo?`<img src="${esc(photo)}" alt="${esc(c.make+" "+c.model)}" loading="lazy">`:"🚘"}</div><div class="details"><h3>${esc(c.make)} ${esc(c.model)}</h3><div class="price">${esc(formatPrice(c.price))}</div><div class="specs"><span>${esc(c.year)}</span><span>${esc(c.km)}</span><span>${esc(c.fuel)}</span><span>${esc(c.transmission)}</span><span>${esc(c.owner||"")}</span></div>${c.description?`<p style="font-size:13px;color:#667085">${esc(c.description)}</p>`:""}<a class="btn" href="https://wa.me/919442080033?text=${msg}" target="_blank" rel="noopener">Enquire on WhatsApp</a></div></article>`}).join("");
 }
 async function checkAdmin(){
  const {data,error}=await sb.rpc("is_car_admin");
@@ -115,7 +124,7 @@ async function refreshAdmin(){
  const {data,error}=await sb.from("cars").select("*").order("created_at",{ascending:false});
  if(error){status("Could not load admin listings: "+error.message,true);return;}
  const rows=data||[];$("adminCount").textContent=rows.length;
- $("adminList").innerHTML=rows.length?rows.map(c=>`<div class="admin-row"><img src="${esc(publicPhoto(c.photo_path)||"assets/logo.jpg")}" alt=""><div class="meta"><strong>${esc(c.make)} ${esc(c.model)} ${c.is_active?"":"(Hidden)"}</strong><small>${esc(c.year)} · ${esc(c.price)} · ${esc(c.km)}</small></div><button class="btn btn-light" type="button" data-edit="${c.id}">Edit</button><button class="btn btn-red" type="button" data-delete="${c.id}">Delete</button></div>`).join(""):'<p style="color:#667085">No cars added yet. Add your first car above.</p>';
+ $("adminList").innerHTML=rows.length?rows.map(c=>`<div class="admin-row"><img src="${esc(publicPhoto(c.photo_path)||"assets/logo.jpg")}" alt=""><div class="meta"><strong>${esc(c.make)} ${esc(c.model)} ${c.is_active?"":"(Hidden)"}</strong><small>${esc(c.year)} · ${esc(formatPrice(c.price))} · ${esc(c.km)}</small></div><button class="btn btn-light" type="button" data-edit="${c.id}">Edit</button><button class="btn btn-red" type="button" data-delete="${c.id}">Delete</button></div>`).join(""):'<p style="color:#667085">No cars added yet. Add your first car above.</p>';
 }
 $("adminToggle").onclick=async()=>{$("loginArea").classList.toggle("hidden");clearStatus();};
 $("loginBtn").onclick=async()=>{
