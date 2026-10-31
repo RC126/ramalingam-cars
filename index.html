@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Browse used cars at Ramalingam Cars, Udumalpet.">
+<meta name="description" content="Browse used cars at Ramalingam Cars, Udumalpet. Buy, sell and exchange used cars.">
 <meta name="theme-color" content="#102e63">
 <title>Ramalingam Cars | Used Car Catalogue</title>
 <style>
@@ -30,40 +30,37 @@ section{padding:40px 0}.heading{text-align:center}.heading h2{color:var(--navy);
 .field textarea{min-height:75px;resize:vertical}.form-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
 .admin-list{margin-top:18px;border-top:1px solid #e5eaf2}.admin-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #edf0f5}.admin-row img{width:65px;height:52px;object-fit:cover;border-radius:8px;background:#edf2fa}.admin-row .meta{flex:1;min-width:0}.admin-row strong{display:block;color:var(--navy)}.admin-row small{color:var(--muted)}
 .hidden{display:none!important}.notice{padding:11px 13px;background:#fff4df;border:1px solid #f1d8a8;border-radius:9px;font-size:13px;color:#735018;margin:12px 0}
+.status{padding:10px 12px;border-radius:8px;background:#edf6ff;color:#17477c;margin:12px 0;font-size:13px}.status.error{background:#fff0ef;color:#9d2922}
 .about{background:white}.aboutgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}.aboutgrid img{width:100%;border-radius:12px}.contact{background:#e5eefb}.contact h2{color:var(--navy)}
 footer{background:#0b2047;color:#dce7fa;padding:22px 0;font-size:13px}
 @media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.aboutgrid{grid-template-columns:1fr}}
 @media(max-width:540px){.grid{grid-template-columns:1fr}.brand img{width:45px;height:45px}.brand small{display:none}.hero{padding:34px 0}.filters>*{width:100%}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.admin-row{align-items:flex-start}.admin-row .btn{padding:9px;font-size:12px}}
-</style></head>
+</style>
+</head>
 <body>
 <header><nav class="wrap">
 <a class="brand" href="#home"><img src="assets/logo.jpg" alt="Ramalingam Cars logo"><span><strong>RAMALINGAM CARS</strong><small>Used Cars · Buy · Sell · Exchange</small></span></a>
-<a class="btn" href="https://wa.me/919442080033?text=Hello%20Ramalingam%20Cars%2C%20I%20want%20to%20enquire%20about%20your%20cars." target="_blank" rel="noopener">WhatsApp Us</a>
+<a class="btn" href="https://wa.me/919842280033?text=Hello%20Ramalingam%20Cars%2C%20I%20want%20to%20enquire%20about%20your%20cars." target="_blank" rel="noopener">WhatsApp Us</a>
 </nav></header>
 <main>
 <section class="hero" id="home"><div class="wrap"><div class="eyebrow">Your trusted used-car destination</div><h1>Find Your Next<br>Dream Car.</h1>
 <p>Explore our used-car catalogue, check vehicle details and contact Ramalingam Cars directly for price, availability and viewing.</p><a class="btn" href="#catalog">Explore Car Catalogue ↓</a></div></section>
-<section id="catalog"><div class="wrap"><div class="heading"><h2>Our Car Catalogue</h2><p id="stockCount">Browse available cars and enquire in one tap.</p></div>
+<section id="catalog"><div class="wrap"><div class="heading"><h2>Our Car Catalogue</h2><p id="stockCount">Loading available cars...</p></div>
 <div class="filters"><input id="search" placeholder="Search make, model or year..." aria-label="Search cars"><select id="body"><option value="">All body types</option><option>Hatchback</option><option>Sedan</option><option>SUV</option><option>MUV</option><option>Other</option></select><select id="fuel"><option value="">All fuel types</option><option>Petrol</option><option>Diesel</option><option>CNG</option><option>Electric</option><option>Hybrid</option></select></div>
-<div class="grid" id="cars"></div><p style="text-align:center;color:#667085;font-size:12px">Please confirm vehicle availability and price before visiting.</p></div></section>
-
-<section id="admin" style="background:#edf2fa"><div class="wrap">
-<div class="panel">
-<div class="panel-head"><div><div class="eyebrow">Owner dashboard</div><h2>Manage Your Car Catalogue</h2><p style="margin:0;color:#667085;font-size:13px">Add new cars, update details/photos, or remove sold vehicles.</p></div><button class="btn" id="adminToggle" type="button">Admin Login</button></div>
-<div id="loginArea" class="hidden">
-<div class="notice">Enter your admin PIN to manage listings. Change the default PIN in the website code before publishing.</div>
-<div class="field" style="max-width:300px"><label for="pin">Admin PIN</label><input id="pin" type="password" inputmode="numeric" placeholder="Enter admin PIN"></div>
-<div class="form-actions"><button class="btn" id="loginBtn" type="button">Unlock Admin</button></div><p id="loginError" style="color:#b42318;font-size:13px"></p>
-</div>
+<div class="grid" id="cars"><div class="empty">Connecting to car catalogue...</div></div><p style="text-align:center;color:#667085;font-size:12px">Please confirm vehicle availability and price before visiting.</p></div></section>
+<section id="admin" style="background:#edf2fa"><div class="wrap"><div class="panel">
+<div class="panel-head"><div><div class="eyebrow">Owner dashboard</div><h2>Manage Your Car Catalogue</h2><p style="margin:0;color:#667085;font-size:13px">Sign in with your Supabase admin email and password to manage shared listings.</p></div><button class="btn" id="adminToggle" type="button">Admin Login</button></div>
+<div id="loginArea" class="hidden"><div class="formgrid">
+<div class="field"><label for="email">Admin Email</label><input id="email" type="email" autocomplete="username" placeholder="Your admin email"></div>
+<div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Your Supabase password"></div>
+</div><div class="form-actions"><button class="btn" id="loginBtn" type="button">Sign In</button></div></div>
 <div id="adminArea" class="hidden">
-<div class="notice">Changes are saved in this browser on this device. Export a backup regularly. To manage the same stock across multiple phones/computers, connect a shared online database.</div>
-<h3 id="formTitle" style="color:#102e63">Add a New Car</h3>
-<form id="carForm">
-<input type="hidden" id="editId">
+<div class="notice">Listings and photos are saved in your Supabase project and shared across devices. Only approved admin accounts can make changes.</div>
+<h3 id="formTitle" style="color:#102e63">Add a New Car</h3><form id="carForm"><input type="hidden" id="editId">
 <div class="formgrid">
 <div class="field"><label for="make">Brand *</label><input id="make" required placeholder="e.g. Maruti Suzuki"></div>
 <div class="field"><label for="model">Model / Variant *</label><input id="model" required placeholder="e.g. Swift Dzire VDI"></div>
-<div class="field"><label for="yearInput">Year *</label><input id="yearInput" required placeholder="e.g. 2020" inputmode="numeric"></div>
+<div class="field"><label for="yearInput">Year *</label><input id="yearInput" type="number" min="1980" max="2035" required placeholder="2020"></div>
 <div class="field"><label for="priceInput">Selling Price *</label><input id="priceInput" required placeholder="e.g. ₹5.25 lakh"></div>
 <div class="field"><label for="kmInput">Kilometres *</label><input id="kmInput" required placeholder="e.g. 1,16,000 km"></div>
 <div class="field"><label for="fuelInput">Fuel *</label><select id="fuelInput" required><option value="">Select fuel</option><option>Petrol</option><option>Diesel</option><option>CNG</option><option>Electric</option><option>Hybrid</option></select></div>
@@ -73,61 +70,90 @@ footer{background:#0b2047;color:#dce7fa;padding:22px 0;font-size:13px}
 <div class="field"><label for="photoInput">Car Photo</label><input id="photoInput" type="file" accept="image/*"></div>
 <div class="field full"><label for="noteInput">Additional Details</label><textarea id="noteInput" placeholder="Colour, insurance, service history, special features..."></textarea></div>
 </div>
-<p id="photoStatus" style="font-size:12px;color:#667085">Choose a photo from your phone or computer. The image is saved with this browser's catalogue.</p>
+<p id="photoStatus" style="font-size:12px;color:#667085">Choose a photo. It will upload to the Supabase car-photos bucket.</p>
 <div class="form-actions"><button class="btn" type="submit" id="saveBtn">Save Car</button><button class="btn btn-light" type="button" id="cancelEdit">Clear Form</button></div>
 </form>
-<div class="panel-head" style="margin-top:25px"><h3 style="margin:0;color:#102e63">Current Listings (<span id="adminCount">0</span>/40)</h3><div class="form-actions" style="margin:0"><button class="btn btn-light" id="exportBtn" type="button">Export Backup</button><label class="btn btn-light" for="importFile">Import Backup</label><input class="hidden" id="importFile" type="file" accept="application/json"></div></div>
-<div id="adminList" class="admin-list"></div>
-<div class="form-actions"><button class="btn btn-light" id="logoutBtn" type="button">Lock Admin</button></div>
-</div></div></div></section>
-
-<section class="about"><div class="wrap aboutgrid"><div><div class="eyebrow">About us</div><h2 style="color:#102e63">Ramalingam Cars</h2><p>Used-car buying, selling, exchange and finance enquiries. Browse our listings and contact our team for current stock and vehicle details.</p><p><b>Phone / WhatsApp:</b> 98422 80033 / 94420 80033</p><p><b>Address:</b> 1st Street, Anusham Nagar, Udumalpet - 642126</p></div><img src="assets/business-card.jpg" alt="Ramalingam Cars contact card"></div></section>
-<section class="contact"><div class="wrap"><h2>Interested in a car?</h2><p>Contact us for more photos, latest price and availability.</p><a class="btn" href="https://wa.me/919442080033?text=Hello%20Ramalingam%20Cars%2C%20please%20share%20your%20available%20car%20list." target="_blank" rel="noopener">Chat on WhatsApp →</a></div></section>
+<div class="panel-head" style="margin-top:25px"><h3 style="margin:0;color:#102e63">Current Listings (<span id="adminCount">0</span>)</h3></div>
+<div id="adminList" class="admin-list"></div><div class="form-actions"><button class="btn btn-light" id="logoutBtn" type="button">Sign Out</button></div>
+</div><div id="status" class="status hidden" role="status"></div>
+</div></div></section>
+<section class="about"><div class="wrap aboutgrid"><div><div class="eyebrow">About us</div><h2 style="color:#102e63">Ramalingam Cars</h2><p>Used-car buying, selling, exchange and finance enquiries. Browse our listings and contact our team for current stock and vehicle details.</p><p><b>Phone / WhatsApp:</b> 98422 80033</p><p><b>Address:</b> 1st Street, Anusam Nagar, Udumalpet - 642126</p></div><img src="assets/business-card.jpg" alt="Ramalingam Cars contact card"></div></section>
+<section class="contact"><div class="wrap"><h2>Interested in a car?</h2><p>Contact us for more photos, latest price and availability.</p><a class="btn" href="https://wa.me/919842280033?text=Hello%20Ramalingam%20Cars%2C%20please%20share%20your%20available%20car%20list." target="_blank" rel="noopener">Chat on WhatsApp →</a></div></section>
 </main><footer><div class="wrap">© <span id="year"></span> Ramalingam Cars · Udumalpet, Tamil Nadu</div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* IMPORTANT: Change this PIN before publishing. This is a basic browser-side lock, not server-grade security. */
-const ADMIN_PIN = "2468";
-const STORAGE_KEY = "ramalingamCarsInventory_v1";
-const MAX_CARS = 40;
-let cars = [];
-let adminUnlocked = false;
-let pendingPhoto = "";
+/* Supabase project connection: the publishable key is designed for browser use.
+   Security is enforced by Supabase Auth and Row Level Security policies. */
+const SUPABASE_URL = "https://enilqwwxidxatouuttks.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_Q940Q1zgL4vwJD40pplC3Q_E791RxTl";
+const BUCKET = "car-photos";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+let cars = [], isAdmin = false, pendingPhoto = null;
 const $ = id => document.getElementById(id);
-function loadCars(){try{cars=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");if(!Array.isArray(cars))cars=[];}catch(e){cars=[];}}
-function saveCars(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(cars));return true;}catch(e){alert("Browser storage is full. Export a backup and use smaller/compressed photos.");return false;}}
+function status(message, error=false){const el=$("status");el.textContent=message;el.classList.remove("hidden","error");if(error)el.classList.add("error");}
+function clearStatus(){$("status").classList.add("hidden");}
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function publicPhoto(path){if(!path)return "";return sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;}
+async function loadCars(){
+ $("cars").innerHTML='<div class="empty">Loading cars...</div>';
+ const {data,error}=await sb.from("cars").select("*").eq("is_active",true).order("created_at",{ascending:false});
+ if(error){$("stockCount").textContent="Car catalogue temporarily unavailable."; $("cars").innerHTML='<div class="empty">Unable to load cars right now. Please contact us on WhatsApp.</div>';console.error(error);return;}
+ cars=data||[];render();
+}
 function render(){
  const q=$("search").value.toLowerCase(),b=$("body").value,f=$("fuel").value;
- const list=cars.filter(c=>(!q||[c.make,c.model,c.year,c.fuel,c.note].join(" ").toLowerCase().includes(q))&&(!b||c.type===b)&&(!f||c.fuel===f));
- $("stockCount").textContent=`${cars.length} car${cars.length===1?"":"s"} listed · Search and enquire directly on WhatsApp`;
+ const list=cars.filter(c=>(!q||[c.make,c.model,c.year,c.fuel,c.description].join(" ").toLowerCase().includes(q))&&(!b||c.body_type===b)&&(!f||c.fuel===f));
+ $("stockCount").textContent=`${cars.length} car${cars.length===1?"":"s"} currently available · Enquire directly on WhatsApp`;
  if(!list.length){$("cars").innerHTML='<div class="empty"><h3>No cars match your search</h3><p>Try changing your filters or contact us for current stock.</p><a class="btn" href="https://wa.me/919842280033?text=Hello%2C%20please%20share%20your%20available%20cars." target="_blank">Ask for Available Cars</a></div>';return;}
- $("cars").innerHTML=list.map(c=>{const msg=encodeURIComponent(`Hello Ramalingam Cars, I am interested in the ${c.year} ${c.make} ${c.model}. Please share availability and details.`);return `<article class="card"><div class="photo">${c.photo?`<img src="${c.photo}" alt="${esc(c.make+" "+c.model)}" loading="lazy">`:"🚘"}</div><div class="details"><h3>${esc(c.make)} ${esc(c.model)}</h3><div class="price">${esc(c.price)}</div><div class="specs"><span>${esc(c.year)}</span><span>${esc(c.km)}</span><span>${esc(c.fuel)}</span><span>${esc(c.gear)}</span><span>${esc(c.owner)}</span></div>${c.note?`<p style="font-size:13px;color:#667085">${esc(c.note)}</p>`:""}<a class="btn" href="https://wa.me/919842280033?text=${msg}" target="_blank" rel="noopener">Enquire on WhatsApp</a></div></article>`}).join("");
+ $("cars").innerHTML=list.map(c=>{const msg=encodeURIComponent(`Hello Ramalingam Cars, I am interested in the ${c.year} ${c.make} ${c.model}. Please share availability and details.`);const photo=publicPhoto(c.photo_path);return `<article class="card"><div class="photo">${photo?`<img src="${esc(photo)}" alt="${esc(c.make+" "+c.model)}" loading="lazy">`:"🚘"}</div><div class="details"><h3>${esc(c.make)} ${esc(c.model)}</h3><div class="price">${esc(c.price)}</div><div class="specs"><span>${esc(c.year)}</span><span>${esc(c.km)}</span><span>${esc(c.fuel)}</span><span>${esc(c.transmission)}</span><span>${esc(c.owner||"")}</span></div>${c.description?`<p style="font-size:13px;color:#667085">${esc(c.description)}</p>`:""}<a class="btn" href="https://wa.me/919842280033?text=${msg}" target="_blank" rel="noopener">Enquire on WhatsApp</a></div></article>`}).join("");
 }
-function renderAdmin(){
- $("adminCount").textContent=cars.length;
- $("adminList").innerHTML=cars.length?cars.map(c=>`<div class="admin-row"><img src="${c.photo||"assets/logo.jpg"}" alt=""><div class="meta"><strong>${esc(c.make)} ${esc(c.model)}</strong><small>${esc(c.year)} · ${esc(c.price)} · ${esc(c.km)}</small></div><button class="btn btn-light" type="button" data-edit="${c.id}">Edit</button><button class="btn btn-red" type="button" data-delete="${c.id}">Delete</button></div>`).join(""):'<p style="color:#667085">No cars added yet. Use the form above to add your first car.</p>';
+async function checkAdmin(){
+ const {data,error}=await sb.rpc("is_car_admin");
+ if(error||data!==true){isAdmin=false;return false;}isAdmin=true;return true;
 }
-function clearForm(){ $("carForm").reset();$("editId").value="";pendingPhoto="";$("photoStatus").textContent="Choose a photo from your phone or computer. The image is saved with this browser's catalogue.";$("formTitle").textContent="Add a New Car";$("saveBtn").textContent="Save Car"; }
-$("adminToggle").onclick=()=>{if(adminUnlocked){$("adminArea").classList.toggle("hidden");return;}$("loginArea").classList.toggle("hidden");};
-$("loginBtn").onclick=()=>{if($("pin").value===ADMIN_PIN){adminUnlocked=true;$("loginArea").classList.add("hidden");$("adminArea").classList.remove("hidden");$("loginError").textContent="";$("pin").value="";renderAdmin();}else{$("loginError").textContent="Incorrect PIN. Please try again.";};};
-$("logoutBtn").onclick=()=>{adminUnlocked=false;$("adminArea").classList.add("hidden");$("loginArea").classList.add("hidden");clearForm();};
-$("photoInput").onchange=()=>{const file=$("photoInput").files[0];if(!file)return;if(!file.type.startsWith("image/")){alert("Please choose an image file.");return;}if(file.size>5*1024*1024){alert("Please choose a photo smaller than 5 MB.");$("photoInput").value="";return;}const reader=new FileReader();reader.onload=()=>{pendingPhoto=reader.result;$("photoStatus").textContent="Photo selected: "+file.name;};reader.readAsDataURL(file);};
-$("carForm").onsubmit=e=>{
- e.preventDefault();if(!adminUnlocked)return;
- const id=$("editId").value;const old=cars.find(c=>c.id===id);
- if(!old&&cars.length>=MAX_CARS){alert("The catalogue limit is 40 cars. Delete a sold car before adding another.");return;}
- const car={id:id||("car_"+Date.now()+"_"+Math.random().toString(36).slice(2,7)),make:$("make").value.trim(),model:$("model").value.trim(),year:$("yearInput").value.trim(),price:$("priceInput").value.trim(),km:$("kmInput").value.trim(),fuel:$("fuelInput").value,gear:$("gearInput").value,type:$("typeInput").value,owner:$("ownerInput").value,note:$("noteInput").value.trim(),photo:pendingPhoto||(old?old.photo:"")};
- if(old)cars=cars.map(c=>c.id===id?car:c);else cars.unshift(car);
- if(saveCars()){clearForm();render();renderAdmin();alert(old?"Car details updated.":"Car added to catalogue.");}
+async function refreshAdmin(){
+ const {data,error}=await sb.from("cars").select("*").order("created_at",{ascending:false});
+ if(error){status("Could not load admin listings: "+error.message,true);return;}
+ const rows=data||[];$("adminCount").textContent=rows.length;
+ $("adminList").innerHTML=rows.length?rows.map(c=>`<div class="admin-row"><img src="${esc(publicPhoto(c.photo_path)||"assets/logo.jpg")}" alt=""><div class="meta"><strong>${esc(c.make)} ${esc(c.model)} ${c.is_active?"":"(Hidden)"}</strong><small>${esc(c.year)} · ${esc(c.price)} · ${esc(c.km)}</small></div><button class="btn btn-light" type="button" data-edit="${c.id}">Edit</button><button class="btn btn-red" type="button" data-delete="${c.id}">Delete</button></div>`).join(""):'<p style="color:#667085">No cars added yet. Add your first car above.</p>';
+}
+$("adminToggle").onclick=async()=>{$("loginArea").classList.toggle("hidden");clearStatus();};
+$("loginBtn").onclick=async()=>{
+ const email=$("email").value.trim(),password=$("password").value;
+ if(!email||!password){status("Enter your admin email and password.",true);return;}
+ const {error}=await sb.auth.signInWithPassword({email,password});
+ if(error){status("Sign-in failed: "+error.message,true);return;}
+ if(!(await checkAdmin())){await sb.auth.signOut();status("This account is not approved as a Ramalingam Cars admin. Ask the project owner to check the admin_users table.",true);return;}
+ $("loginArea").classList.add("hidden");$("adminArea").classList.remove("hidden");$("adminToggle").textContent="Admin Dashboard";status("Admin signed in successfully.");await refreshAdmin();
+};
+$("logoutBtn").onclick=async()=>{await sb.auth.signOut();isAdmin=false;$("adminArea").classList.add("hidden");$("loginArea").classList.add("hidden");$("adminToggle").textContent="Admin Login";clearForm();status("You have signed out.");};
+function clearForm(){$("carForm").reset();$("editId").value="";pendingPhoto=null;$("photoStatus").textContent="Choose a photo. It will upload to the Supabase car-photos bucket.";$("formTitle").textContent="Add a New Car";$("saveBtn").textContent="Save Car";}
+$("photoInput").onchange=()=>{const file=$("photoInput").files[0];if(!file)return;if(!file.type.startsWith("image/")){status("Please choose an image file.",true);return;}if(file.size>5*1024*1024){status("Please choose a photo smaller than 5 MB.",true);$("photoInput").value="";return;}pendingPhoto=file;$("photoStatus").textContent="Photo selected: "+file.name;};
+$("carForm").onsubmit=async e=>{
+ e.preventDefault();if(!isAdmin){status("Please sign in as an approved admin first.",true);return;}
+ const id=$("editId").value;
+ const record={make:$("make").value.trim(),model:$("model").value.trim(),year:Number($("yearInput").value),price:$("priceInput").value.trim(),km:$("kmInput").value.trim(),fuel:$("fuelInput").value,transmission:$("gearInput").value,body_type:$("typeInput").value,owner:$("ownerInput").value,description:$("noteInput").value.trim(),is_active:true,updated_at:new Date().toISOString()};
+ if(pendingPhoto){
+   const ext=(pendingPhoto.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
+   const path=`${crypto.randomUUID()}.${ext}`;
+   const {error:uploadError}=await sb.storage.from(BUCKET).upload(path,pendingPhoto,{upsert:false,contentType:pendingPhoto.type});
+   if(uploadError){status("Photo upload failed: "+uploadError.message,true);return;}
+   record.photo_path=path;
+ }
+ let result;
+ if(id)result=await sb.from("cars").update(record).eq("id",id);
+ else result=await sb.from("cars").insert(record);
+ if(result.error){status("Could not save car: "+result.error.message,true);return;}
+ clearForm();await loadCars();await refreshAdmin();status(id?"Car details updated.":"Car added to the shared catalogue.");
 };
 $("cancelEdit").onclick=clearForm;
-$("adminList").onclick=e=>{
+$("adminList").onclick=async e=>{
  const edit=e.target.closest("[data-edit]"),del=e.target.closest("[data-delete]");
- if(edit){const c=cars.find(x=>x.id===edit.dataset.edit);if(!c)return;$("editId").value=c.id;$("make").value=c.make;$("model").value=c.model;$("yearInput").value=c.year;$("priceInput").value=c.price;$("kmInput").value=c.km;$("fuelInput").value=c.fuel;$("gearInput").value=c.gear;$("typeInput").value=c.type;$("ownerInput").value=c.owner||"";$("noteInput").value=c.note||"";pendingPhoto="";$("photoStatus").textContent=c.photo?"Existing photo kept unless you choose a replacement.":"No photo saved for this car.";$("formTitle").textContent="Edit Car Details";$("saveBtn").textContent="Update Car";$("carForm").scrollIntoView({behavior:"smooth",block:"start"});}
- if(del){const c=cars.find(x=>x.id===del.dataset.delete);if(!c)return;if(confirm(`Delete ${c.make} ${c.model} from the catalogue? This cannot be undone unless you have a backup.`)){cars=cars.filter(x=>x.id!==c.id);if(saveCars()){render();renderAdmin();}}}
+ if(edit){const {data,error}=await sb.from("cars").select("*").eq("id",edit.dataset.edit).single();if(error){status(error.message,true);return;}const c=data;$("editId").value=c.id;$("make").value=c.make;$("model").value=c.model;$("yearInput").value=c.year;$("priceInput").value=c.price;$("kmInput").value=c.km;$("fuelInput").value=c.fuel;$("gearInput").value=c.transmission;$("typeInput").value=c.body_type;$("ownerInput").value=c.owner||"";$("noteInput").value=c.description||"";pendingPhoto=null;$("photoStatus").textContent=c.photo_path?"Existing photo will be kept unless you choose a replacement.":"No photo saved for this car.";$("formTitle").textContent="Edit Car Details";$("saveBtn").textContent="Update Car";$("carForm").scrollIntoView({behavior:"smooth",block:"start"});}
+ if(del){if(!confirm("Delete this car from the shared catalogue?"))return;const {error}=await sb.from("cars").delete().eq("id",del.dataset.delete);if(error){status("Delete failed: "+error.message,true);return;}await loadCars();await refreshAdmin();status("Car deleted.");}
 };
-$("exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify(cars,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="ramalingam-cars-backup.json";a.click();URL.revokeObjectURL(url);};
-$("importFile").onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());if(!Array.isArray(data)||data.length>MAX_CARS)throw new Error("Backup must be a list of up to 40 cars.");if(!confirm("Import this backup and replace the current catalogue?"))return;cars=data;if(saveCars()){render();renderAdmin();alert("Backup imported.");}}catch(err){alert("Could not import backup: "+err.message);}e.target.value="";};
 ["search","body","fuel"].forEach(id=>$(id).addEventListener("input",render));
-$("year").textContent=new Date().getFullYear();loadCars();render();
+$("year").textContent=new Date().getFullYear();
+sb.auth.getSession().then(async({data})=>{if(data.session&&await checkAdmin()){$("adminArea").classList.remove("hidden");$("adminToggle").textContent="Admin Dashboard";await refreshAdmin();}});
+loadCars();
 </script></body></html>
