@@ -49,13 +49,13 @@ footer{background:#0b2047;color:#dce7fa;padding:22px 0;font-size:13px}
 <div class="filters"><input id="search" placeholder="Search make, model or year..." aria-label="Search cars"><select id="body"><option value="">All body types</option><option>Hatchback</option><option>Sedan</option><option>SUV</option><option>MUV</option><option>Other</option></select><select id="fuel"><option value="">All fuel types</option><option>Petrol</option><option>Diesel</option><option>CNG</option><option>Electric</option><option>Hybrid</option></select></div>
 <div class="grid" id="cars"><div class="empty">Connecting to car catalogue...</div></div><p style="text-align:center;color:#667085;font-size:12px">Please confirm vehicle availability and price before visiting.</p></div></section>
 <section id="admin" style="background:#edf2fa"><div class="wrap"><div class="panel">
-<div class="panel-head"><div><div class="eyebrow">Owner dashboard</div><h2>Manage Your Car Catalogue</h2><p style="margin:0;color:#667085;font-size:13px">Sign in with your Supabase admin email and password to manage shared listings.</p></div><button class="btn" id="adminToggle" type="button">Admin Login</button></div>
+<div class="panel-head"><div><div class="eyebrow">Owner dashboard</div><h2>Manage Your Car Catalogue</h2><p style="margin:0;color:#667085;font-size:13px">Sign in admin</p></div><button class="btn" id="adminToggle" type="button">Admin Login</button></div>
 <div id="loginArea" class="hidden"><div class="formgrid">
 <div class="field"><label for="email">Admin Email</label><input id="email" type="email" autocomplete="username" placeholder="Your admin email"></div>
-<div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Your Supabase password"></div>
+<div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="password"></div>
 </div><div class="form-actions"><button class="btn" id="loginBtn" type="button">Sign In</button></div></div>
 <div id="adminArea" class="hidden">
-<div class="notice">Listings and photos are saved in your Supabase project and shared across devices. Only approved admin accounts can make changes.</div>
+<div class="notice">Only approved admin accounts can make changes.</div>
 <h3 id="formTitle" style="color:#102e63">Add a New Car</h3><form id="carForm"><input type="hidden" id="editId">
 <div class="formgrid">
 <div class="field"><label for="make">Brand *</label><input id="make" required placeholder="e.g. Maruti Suzuki"></div>
@@ -63,19 +63,20 @@ footer{background:#0b2047;color:#dce7fa;padding:22px 0;font-size:13px}
 <div class="field"><label for="yearInput">Year *</label><input id="yearInput" type="number" min="1980" max="2035" required placeholder="2020"></div>
 <div class="field"><label for="priceInput">Selling Price *</label><input id="priceInput" required placeholder="e.g. ₹5.25 lakh"></div>
 <div class="field"><label for="kmInput">Kilometres *</label><input id="kmInput" required placeholder="e.g. 1,16,000 km"></div>
-<div class="field"><label for="fuelInput">Fuel *</label><select id="fuelInput" required><option value="">Select fuel</option><option>Petrol</option><option>Diesel</option><option>CNG</option><option>Electric</option><option>Hybrid</option></select></div>
+<div class="field"><label for="fuelInput">Fuel *</label><select id="fuelInput" required><option value="">Select fuel</option><option>Petrol</option><option>Diesel</option><option>LPG</option><option>CNG</option><option>Electric</option><option>Hybrid</option></select></div>
 <div class="field"><label for="gearInput">Transmission *</label><select id="gearInput" required><option value="">Select transmission</option><option>Manual</option><option>Automatic</option></select></div>
 <div class="field"><label for="typeInput">Body Type *</label><select id="typeInput" required><option value="">Select type</option><option>Hatchback</option><option>Sedan</option><option>SUV</option><option>MUV</option><option>Other</option></select></div>
-<div class="field"><label for="ownerInput">Owner</label><select id="ownerInput"><option value="">Select owner</option><option>1st Owner</option><option>2nd Owner</option><option>3rd Owner</option><option>4th Owner</option></select></div>
+<div class="field"><label for="ownerInput">Owner</label><select id="ownerInput"><option value="">Select owner</option><option>1st Owner</option><option>2nd Owner</option><option>3rd Owner</option><option>4th Owner</option><option>4+ Owners</option></select></div>
 <div class="field"><label for="photoInput">Car Photo</label><input id="photoInput" type="file" accept="image/*"></div>
 <div class="field full"><label for="noteInput">Additional Details</label><textarea id="noteInput" placeholder="Colour, insurance, service history, special features..."></textarea></div>
 </div>
-<p id="photoStatus" style="font-size:12px;color:#667085">Choose a photo. It will upload to the Supabase car-photos bucket.</p>
+<p id="photoStatus" style="font-size:12px;color:#667085">Choose a photo. It will upload to the car-photos bucket.</p>
 <div class="form-actions"><button class="btn" type="submit" id="saveBtn">Save Car</button><button class="btn btn-light" type="button" id="cancelEdit">Clear Form</button></div>
 </form>
+</div><div id="status" class="status hidden" role="status"></div>
 <div class="panel-head" style="margin-top:25px"><h3 style="margin:0;color:#102e63">Current Listings (<span id="adminCount">0</span>)</h3></div>
 <div id="adminList" class="admin-list"></div><div class="form-actions"><button class="btn btn-light" id="logoutBtn" type="button">Sign Out</button></div>
-</div><div id="status" class="status hidden" role="status"></div>
+
 </div></div></section>
 <section class="about"><div class="wrap aboutgrid"><div><div class="eyebrow">About us</div><h2 style="color:#102e63">Ramalingam Cars</h2><p>Used-car buying, selling, exchange and finance enquiries. Browse our listings and contact our team for current stock and vehicle details.</p><p><b>Phone / WhatsApp:</b> 98422 80033</p><p><b>Address:</b> 1st Street, Anusam Nagar, Udumalpet - 642126</p></div><img src="assets/business-card.jpg" alt="Ramalingam Cars contact card"></div></section>
 <section class="contact"><div class="wrap"><h2>Interested in a car?</h2><p>Contact us for more photos, latest price and availability.</p><a class="btn" href="https://wa.me/919842280033?text=Hello%20Ramalingam%20Cars%2C%20please%20share%20your%20available%20car%20list." target="_blank" rel="noopener">Chat on WhatsApp →</a></div></section>
